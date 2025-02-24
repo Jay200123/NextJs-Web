@@ -33,8 +33,8 @@ export default function Home() {
           />
         </div>
         <div className="relative shadow-md">
-        <h3 onClick={()=>router.replace("/comments")} className="absolute cursor-pointer top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl text-white font-bold">
-           Comments
+        <h3 onClick={()=>router.replace("/todos")} className="absolute cursor-pointer top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl text-white font-bold">
+           Todos
           </h3>
           <Image
             src={ImageThree}
