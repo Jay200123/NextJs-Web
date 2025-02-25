@@ -1,5 +1,5 @@
 import { StateCreator } from "zustand";
-import { UserApiSlice } from "@/types";
+import { UserApiSlice, User } from "@/types";
 import axios from "axios";
 
 export const createUsersApi: StateCreator<UserApiSlice> = (set) => ({
@@ -18,14 +18,13 @@ export const createUsersApi: StateCreator<UserApiSlice> = (set) => ({
     return res?.data;
   },
 
-  addUser: async (user) => {
+  addUser: async (payload) => {
     const res = await axios.post(
       "https://jsonplaceholder.typicode.com/users",
-      user
+      payload
     );
 
-    console.log(res);
-    set((state) => ({ users: [...state.users, res?.data] }));
+    set((state) => ({ users: [...state.users, res?.data] })); 
   },
   deleteUser: async (id) => {
     // delete user
