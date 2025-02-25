@@ -12,10 +12,14 @@ export default function () {
     queryFn: getAllUsers,
   });
 
+
   return (
     <div className="flex items-center justify-center w-full mt-4 h-full">
       <div className="flex flex-col w-[32rem] items-center h-full border rounded-md border-gray-400">
+        <div className="flex items-center w-full justify-between px-4 py-2">
         <h1 className="text-3xl font-bold">Users</h1>
+        <h1 onClick={()=>router.push("/users/add")} className="text-3xl cursor-pointer font-bold">+</h1>
+        </div>
         {users.map((user) => (
           <div
             key={user.id}
