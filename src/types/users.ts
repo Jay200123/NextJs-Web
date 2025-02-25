@@ -17,7 +17,7 @@ type Company = {
   bs: string;
 };
 
-type User = {
+export type User = {
   id: number;
   username: string;
   email: string;
@@ -35,7 +35,7 @@ type UserState = {
 type UserActions = {
   getAllUsers: () => Promise<void>;
   getUserById: (id: number) => Promise<void>;
-  addUser: (payload: FormData) => Promise<void>;
+  addUser: (payload: User) => Promise<void>;
   deleteUser: (id: number) => Promise<void>;
   updateUser: (user: User) => Promise<void>;
 };
