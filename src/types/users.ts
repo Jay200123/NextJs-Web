@@ -29,12 +29,13 @@ type User = {
 
 type UserState = {
   users: User[];
+  user: User | null;  
 };
 
 type UserActions = {
   getAllUsers: () => Promise<void>;
   getUserById: (id: number) => Promise<void>;
-  addUser: (user: User) => Promise<void>;
+  addUser: (payload: FormData) => Promise<void>;
   deleteUser: (id: number) => Promise<void>;
   updateUser: (user: User) => Promise<void>;
 };
