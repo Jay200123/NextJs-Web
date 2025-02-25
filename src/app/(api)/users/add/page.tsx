@@ -3,7 +3,6 @@ import { useFormik } from "formik";
 import { useStore } from "@/state/store";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 export default function () {
   const router = useRouter();
@@ -21,6 +20,8 @@ export default function () {
       id: userId,
       username: "",
       email: "",
+      phone: "",
+      website: "",
       address: {
         street: "",
         city: "",
@@ -34,28 +35,15 @@ export default function () {
       company: {
         name: "",
         catchPhrase: "",
+        bs: "",
       },
     },
     onSubmit: async (values) => {
-      const formData = new FormData();
-      formData.append("id", values.id.toString());
-      formData.append("username", values.username);
-      formData.append("email", values.email);
-      formData.append("address[street]", values.address.street);
-      formData.append("address[city]", values.address.city);
-      formData.append("address[suite]", values.address.suite);
-      formData.append("address[zipcode]", values.address.zipcode);
-      formData.append("address[geo][lat]", values.address.geo.lat);
-      formData.append("address[geo][lng]", values.address.geo.lng);
-      formData.append("company[name]", values.company.name);
-      formData.append("company[catchPhrase]", values.company.catchPhrase);
-
-      await addUser(formData);
+      await addUser(values);
       router.push("/users");
+      console.log(values);
     },
   });
-
-  console.log(formik.values);
 
   return (
     <form
@@ -97,6 +85,42 @@ export default function () {
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.email}
+            className="p-2 text-sm border-b border-gray-700 rounded-sm md:text-base placeholder:text-gray-700"
+          />
+        </div>
+
+        <div className="flex flex-col mb-1">
+          <label
+            htmlFor="phone"
+            className="text-sm font-medium text-black md:text-base"
+          >
+            Phone
+          </label>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            value={formik.values.phone}
+            className="p-2 text-sm border-b border-gray-700 rounded-sm md:text-base placeholder:text-gray-700"
+          />
+        </div>
+
+        <div className="flex flex-col mb-1">
+          <label
+            htmlFor="website"
+            className="text-sm font-medium text-black md:text-base"
+          >
+            website
+          </label>
+          <input
+            type="text"
+            name="website"
+            id="website"
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            value={formik.values.website}
             className="p-2 text-sm border-b border-gray-700 rounded-sm md:text-base placeholder:text-gray-700"
           />
         </div>
@@ -241,6 +265,24 @@ export default function () {
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values.company.catchPhrase}
+            className="p-2 text-sm border-b border-gray-700 rounded-sm md:text-base placeholder:text-gray-700"
+          />
+        </div>
+
+        <div className="flex flex-col mb-1">
+          <label
+            htmlFor="catchPhrase"
+            className="text-sm font-medium text-black md:text-base"
+          >
+            Company BS
+          </label>
+          <input
+            type="text"
+            name="company[bs]"
+            id="company[bs]"
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            value={formik.values.company.bs}
             className="p-2 text-sm border-b border-gray-700 rounded-sm md:text-base placeholder:text-gray-700"
           />
         </div>
