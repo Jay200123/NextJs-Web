@@ -1,6 +1,7 @@
 import { Navbar, Footer } from "@/components";
 import type { Metadata } from "next";
 import "./globals.css";
+import QueryProvider from "@/providers/QueryProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +18,9 @@ export default function RootLayout({
       <body>
         <main className="min-h-screen w-full flex flex-col justify-between items-center">
           <Navbar />
-          <div>{children}</div>
+          <div>
+            <QueryProvider>{children}</QueryProvider>
+          </div>
           <Footer />
         </main>
       </body>
