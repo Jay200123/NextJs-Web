@@ -1,13 +1,19 @@
 import { StateCreator } from "zustand";
 import { TodoApiSlice } from "@/types";
+import api from "../apiClient";
 
-export const createTodoApi: StateCreator<TodoApiSlice> = (_set) => ({
-  todo: [],
+export const createTodoApi: StateCreator<TodoApiSlice> = (set) => ({
+  todos: [],
+  todo: null,
   getAllTodos: async () => {
-    //fetch all todos
+    const res = await api.get("/todos");
+    set({ todos: res.data });
+    return res.data;
   },
   getTodoById: async (id) => {
-    //fetch todo by id
+    set((state) => ({
+      todo: state.todos.find((t) => t.id === id) || null,
+    }));
   },
   addTodo: async (todo) => {
     //add todo
@@ -17,5 +23,8 @@ export const createTodoApi: StateCreator<TodoApiSlice> = (_set) => ({
   },
   deleteTodo: async (id) => {
     //delete todo
+  },
+  clearTodo: () => {
+    set({ todo: null });
   },
 });
