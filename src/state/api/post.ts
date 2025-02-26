@@ -30,4 +30,7 @@ export const createPostsApi: StateCreator<PostApiSlice> = (set) => ({
       posts: state.posts.filter((p) => p.id !== id),
     }));
   },
+  clearPost: () => {
+    set({ post: null });
+  },  
 });
