@@ -1,22 +1,33 @@
 import { StateCreator } from "zustand";
 import { PostApiSlice } from "@/types";
-import axios from "axios";
+import api from "../apiClient";
 
-export const createPostsApi: StateCreator<PostApiSlice> = (_set) => ({
+export const createPostsApi: StateCreator<PostApiSlice> = (set) => ({
   posts: [],
+  post: null,
   getAllPosts: async () => {
-    //fetch all posts
+    const res = await api.get("/posts");
+    set({ posts: res.data });
+    return res.data;
   },
+
   getPostById: async (id) => {
-    //fetch post by id
+    set((state) => ({ post: state.posts.find((p) => p.id === id) }));
   },
-  addPost: async (post) => {
-    //add post
+  addPost: async (payload) => {
+    await api.post("/posts", payload);
+    set((state) => ({ posts: [...state.posts, payload] }));
   },
-  updatePost: async (post) => {
-    //update post
+  updatePost: async (id, payload) => {
+    await api.put(`/posts/${id}`, payload);
+    set((state) => ({
+      posts: state.posts.map((p) => (p?.id === id ? payload : p)),
+    }));
   },
   deletePost: async (id) => {
-    //delete post
+    await api.delete(`/posts/${id}`);
+    set((state) => ({
+      posts: state.posts.filter((p) => p.id !== id),
+    }));
   },
 });
