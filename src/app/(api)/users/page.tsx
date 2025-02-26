@@ -10,10 +10,6 @@ export default function () {
   useQuery({
     queryKey: ["users"],
     queryFn: getAllUsers,
-    enabled: false,
-    refetchOnWindowFocus: false, // Disable refetching when switching tabs
-    refetchOnReconnect: false, // Disable refetching when internet reconnects
-    refetchOnMount: false, // Prevent refetching when component remounts
   });
 
   const handleDelete = async (id: number) => {  
