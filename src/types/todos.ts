@@ -13,9 +13,9 @@ type TodoState = {
 type TodoActions = {
   getAllTodos: () => Promise<void>;
   getTodoById: (id: number) => Promise<void>;
-  addTodo: (todo: Todos) => Promise<void>;
+  addTodo: (payload: Todos) => Promise<void>;
   deleteTodo: (id: number) => Promise<void>;
-  updateTodo: (todo: Todos) => Promise<void>;
+  updateTodo: (id: number, payload: Todos) => Promise<void>;
   clearTodo: () => void;
 };
 
