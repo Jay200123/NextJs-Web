@@ -8,7 +8,7 @@ export default function () {
   const router = useRouter();
   const { users, getAllUsers, addUser } = useStore();
 
-  useQuery({
+  const { refetch } = useQuery({
     queryKey: ["users"],
     queryFn: getAllUsers,
   });
@@ -39,9 +39,13 @@ export default function () {
       },
     },
     onSubmit: async (values) => {
-      await addUser(values);
-      router.push("/users");
-      console.log(values);
+      try {
+        await addUser(values);
+        router.push("/users");
+        // refetch();
+      } catch (err) {
+        throw new Error("Error Adding a New User");
+      }
     },
   });
 
