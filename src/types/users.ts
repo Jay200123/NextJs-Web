@@ -37,7 +37,8 @@ type UserActions = {
   getUserById: (id: number) => Promise<void>;
   addUser: (payload: User) => Promise<void>;
   deleteUser: (id: number) => Promise<void>;
-  updateUser: (user: User) => Promise<void>;
+  updateUser: (id: number, payload: User) => Promise<void>;
+  clearUser: () => void;
 };
 
 export type UserApiSlice = UserState & UserActions;
