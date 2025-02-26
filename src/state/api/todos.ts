@@ -15,14 +15,21 @@ export const createTodoApi: StateCreator<TodoApiSlice> = (set) => ({
       todo: state.todos.find((t) => t.id === id) || null,
     }));
   },
-  addTodo: async (todo) => {
-    //add todo
+  addTodo: async (payload) => {
+    await api.post("/todos", payload);
+    set((state) => ({ todos: [...state.todos, payload] }));
   },
-  updateTodo: async (todo) => {
-    //update todo
+  updateTodo: async (id, payload) => {
+    await api.put(`/todos/${id}`, payload);
+    set((state) => ({
+      todos: state.todos.map((t) => (t.id === id ? payload : t)),
+    }));
   },
   deleteTodo: async (id) => {
-    //delete todo
+    await api.delete(`/todos/${id}`);
+    set((state) => ({
+      todos: state.todos.filter((t) => t.id !== id),
+    }));
   },
   clearTodo: () => {
     set({ todo: null });
