@@ -6,7 +6,8 @@ type Todos = {
 };
 
 type TodoState = {
-  todo: Todos[];
+  todos: Todos[];
+  todo: Todos | null;
 };
 
 type TodoActions = {
@@ -15,6 +16,7 @@ type TodoActions = {
   addTodo: (todo: Todos) => Promise<void>;
   deleteTodo: (id: number) => Promise<void>;
   updateTodo: (todo: Todos) => Promise<void>;
+  clearTodo: () => void;
 };
 
 export type TodoApiSlice = TodoState & TodoActions;
