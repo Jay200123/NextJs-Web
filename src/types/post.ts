@@ -7,14 +7,15 @@ type Post = {
 
 type PostState = {
   posts: Post[];
+  post: Post | null;  
 };
 
 type PostActions = {
   getAllPosts: () => Promise<void>;
   getPostById: (id: number) => Promise<void>;
-  addPost: (post: Post) => Promise<void>;
+  addPost: (payload: Post) => Promise<void>;
   deletePost: (id: number) => Promise<void>;
-  updatePost: (post: Post) => Promise<void>;
+  updatePost: (id:number, payload: Post) => Promise<void>;
 };
 
 export type PostApiSlice = PostState & PostActions;
