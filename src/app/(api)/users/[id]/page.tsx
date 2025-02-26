@@ -2,15 +2,29 @@
 import { useStore } from "@/state/store";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+
 export default function () {
   const params = useParams();
   const id = Number(params.id);
-  const { user, getUserById } = useStore();
+  const { user, getUserById, clearUser } = useStore();
   useQuery({
     queryKey: ["user", id],
     queryFn: () => getUserById(id),
     enabled: !!id,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    refetchOnMount: false,
   });
+
+
+  // use for clearing user on unmount component
+  useEffect(() => {
+    getUserById(id);
+    return () => {
+      clearUser();
+    };
+  }, []);
 
   return (
     <div className="flex items-center justify-center w-full h-full">
