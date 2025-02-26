@@ -16,6 +16,7 @@ type PostActions = {
   addPost: (payload: Post) => Promise<void>;
   deletePost: (id: number) => Promise<void>;
   updatePost: (id:number, payload: Post) => Promise<void>;
+  clearPost: () => void;
 };
 
 export type PostApiSlice = PostState & PostActions;
